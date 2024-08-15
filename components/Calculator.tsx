@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const Calculator = () => {
-  const [display, setDisplay] = useState('0');
-  const [currentValue, setCurrentValue] = useState(null);
-  const [operation, setOperation] = useState(null);
-  const [waitingForOperand, setWaitingForOperand] = useState(false);
+const Calculator: React.FC = () => {
+  const [display, setDisplay] = useState<string>('0');
+  const [currentValue, setCurrentValue] = useState<number | null>(null);
+  const [operation, setOperation] = useState<string | null>(null);
+  const [waitingForOperand, setWaitingForOperand] = useState<boolean>(false);
 
-  const inputDigit = (digit) => {
+  const inputDigit = (digit: number) => {
     if (waitingForOperand) {
       setDisplay(String(digit));
       setWaitingForOperand(false);
@@ -31,14 +31,14 @@ const Calculator = () => {
     setWaitingForOperand(false);
   };
 
-  const performOperation = (nextOperation) => {
+  const performOperation = (nextOperation: string) => {
     const inputValue = parseFloat(display);
 
     if (currentValue === null) {
       setCurrentValue(inputValue);
     } else if (operation) {
       const currentValueNum = currentValue;
-      let newValue;
+      let newValue: number;
       switch (operation) {
         case '+':
           newValue = currentValueNum + inputValue;
