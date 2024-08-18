@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 
@@ -35,6 +35,15 @@ const Calculator: React.FC = () => {
 
   const performOperation = (nextOperation: string) => {
     const inputValue = parseFloat(display);
+
+    if (nextOperation === '√') {
+      const result = Math.sqrt(inputValue);
+      setDisplay(String(result));
+      setCurrentValue(result);
+      setOperation(null);
+      setWaitingForOperand(true);
+      return;
+    }
 
     if (currentValue === null) {
       setCurrentValue(inputValue);
@@ -79,6 +88,7 @@ const Calculator: React.FC = () => {
         <button onClick={() => performOperation('-')}>-</button>
         <button onClick={() => performOperation('*')}>*</button>
         <button onClick={() => performOperation('/')}>/</button>
+        <button onClick={() => performOperation('√')}>√</button>
         <button onClick={() => performOperation('=')}>=</button>
         <button onClick={clearDisplay}>C</button>
       </div>
